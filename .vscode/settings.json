@@ -1,0 +1,19 @@
+{
+  "audioCues.enabled": "off",
+  "editor.accessibilitySupport": "off",
+  "accessibility.signals.lineHasError": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasWarning": {
+    "sound": "off"
+  },
+  "accessibility.signals.onDebugBreak": {
+    "sound": "off"
+  },
+  "accessibility.signals.diffLineInserted": {
+    "sound": "off"
+  },
+  "accessibility.signals.diffLineDeleted": {
+    "sound": "off"
+  }
+}
