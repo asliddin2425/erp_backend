@@ -34,3 +34,5 @@ export class File extends BaseModel {
   @JoinColumn({ name: "submissionId" })
   submission!: Relation<Submission>;
 }
+
+
