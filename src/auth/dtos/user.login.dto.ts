@@ -10,5 +10,4 @@ export class UserLogin {
     @MaxLength(128)
     @MinLength(4)
     password: string;
-
 }

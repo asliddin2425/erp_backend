@@ -5,8 +5,9 @@ import { BaseModel } from "../../../core/base-model.js";
 
 @Entity("taskCategories")
 export class TaskCategory extends BaseModel {
+
   @Column({ length: 128, unique: true, type: "varchar" })
-  title?: string;
+  title: string;
 
   @OneToMany(() => TaskTemplate, (t) => t.category)
   templates!: Relation<TaskTemplate[]>;
