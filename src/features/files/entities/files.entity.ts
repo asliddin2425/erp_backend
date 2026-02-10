@@ -6,7 +6,7 @@ import { Submission } from "../../submissions/entities/submissions.entity.js";
 import { BaseModel } from "../../../core/base-model.js";
 
 @Entity("files")
-export class File extends BaseModel {
+export class Files extends BaseModel {
   @PrimaryColumn({ type: "int" })
   lessonId!: number;
 

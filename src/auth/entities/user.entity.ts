@@ -4,7 +4,7 @@ import { Gender, Role } from "../../common/enums/enums";
 import { Submission } from "../../features/submissions/entities/submissions.entity.js";
 import { Group } from "../../features/groups/entities/groups.entity.js";
 import { BaseModel } from "../../core/base-model.js";
-import { File } from "../../features/files/entities/files.entity.js";
+import { Files } from "../../features/files/entities/files.entity.js";
 
 @Entity("users")
 export class User extends BaseModel {
@@ -41,6 +41,6 @@ export class User extends BaseModel {
   @OneToMany(() => Submission, (s) => s.student)
   submissions!: Relation<Submission[]>;
 
-  @OneToMany(() => File, file => file.student)
+  @OneToMany(() => Files, file => file.student)
   files: File[];
 }

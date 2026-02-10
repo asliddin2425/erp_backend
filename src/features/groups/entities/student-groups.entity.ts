@@ -4,7 +4,7 @@ import { User } from "../../../auth/entities/user.entity.js";
 import { Group } from "../../groups/entities/groups.entity.js";
 import { BaseModel } from "../../../core/base-model.js";
 
-@Entity("students-groups")
+@Entity("studentGroups")
 export class StudentGroup extends BaseModel {
   @PrimaryColumn({ type: "int" })
   studentId!: number;

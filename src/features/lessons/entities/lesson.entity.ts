@@ -10,7 +10,7 @@ import type { Relation } from "typeorm";
 
 import { Group } from "../../groups/entities/groups.entity";
 import { Task } from "../../tasks/entities/task.entity";
-import { File } from "../../files/entities/files.entity.js";
+import { Files} from "../../files/entities/files.entity.js";
 import { BaseModel } from "../../../core/base-model.js";
 
 @Entity("lessons")
@@ -27,7 +27,7 @@ export class Lesson extends BaseModel {
   @OneToMany(() => Task, (t) => t.lesson)
   tasks!: Relation<Task[]>;
 
-  @OneToMany(() => File, (f) => f.lesson)
+  @OneToMany(() => Files, (f) => f.lesson)
   files!: Relation<File[]>;
 
   @ManyToOne(() => Group, (g) => g.lessons)
