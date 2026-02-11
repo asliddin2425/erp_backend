@@ -28,5 +28,6 @@ export class FilesList {
     path: string;
 
     @Expose()
+    @ApiProperty()
     size: number;
 }
