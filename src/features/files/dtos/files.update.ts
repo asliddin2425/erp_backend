@@ -1,7 +1,9 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, IsOptional, IsString, MaxLength } from "class-validator";
 
 export class FilesUpdate {
     
+    @ApiProperty()
     @IsInt()
     @IsOptional()
     lessonId: number;

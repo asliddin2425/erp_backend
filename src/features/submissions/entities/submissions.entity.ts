@@ -16,10 +16,10 @@ import { BaseModel } from "../../../core/base-model.js";
 
 @Entity("submissions")
 export class Submission extends BaseModel {
-  @PrimaryColumn({ type: "int" })
+  @Column({ type: "int" })
   studentId!: number;
 
-  @PrimaryColumn({ type: "int" })
+  @Column({ type: "int" })
   taskId!: number;
 
   @Column({ nullable: true, type: "text" })
@@ -46,5 +46,5 @@ export class Submission extends BaseModel {
   task!: Relation<Task>;
 
   @OneToMany(() => Files, (f) => f.submission)
-  files!: Relation<File[]>;
+  files!: Relation<Files[]>;
 }

@@ -17,7 +17,7 @@ export class Task extends BaseModel {
   @Column({ type: "int" })
   lessonId!: number;
 
-  @PrimaryColumn({ type: "int" })
+  @Column({ type: "int" })
   templateId!: number;
 
   @Column({ nullable: true, type: "int" })

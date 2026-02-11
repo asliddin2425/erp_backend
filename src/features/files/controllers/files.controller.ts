@@ -1,8 +1,10 @@
-import { Controller, Param } from "@nestjs/common";
+import { Body, Controller, Param, Patch } from "@nestjs/common";
 import { FilesService } from "../files.service";
-import { Get } from "@nestjs/common";
+import { Get, Post } from "@nestjs/common";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { FilesList } from "../dtos/files.list";
+import { FilesCreate } from "../dtos/files.create";
+import { FilesUpdate } from "../dtos/files.update";
 @Controller("files")
 export class FilesController {
     constructor(private readonly service: FilesService) {}
@@ -21,4 +23,17 @@ export class FilesController {
         return await this.service.getOne(id)
     }
 
+    @Post()
+    @ApiOkResponse({type: FilesCreate})
+    async create(@Body() payload: FilesCreate) {
+        return await this.service.create(payload)
+    }
+
+
+    @Patch(":id")
+    // @ApiOkResponse({type: FilesUpdate})
+    async update(@Param("id") id: number, @Body() payload: FilesUpdate) {
+        return await this.service.update(id, payload)
+    }
+    
 }

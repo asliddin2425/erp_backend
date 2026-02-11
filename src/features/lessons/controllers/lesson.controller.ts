@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { LessonService } from "../lesson.service";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { LessonCreate } from "../dtos/lesson.create";
@@ -22,4 +22,11 @@ export class LessonController {
     async getOne(@Param("id") id: number) {
         return await this.service.getOne(id)
     } 
+
+
+    @Post()
+    @ApiOkResponse({type: LessonCreate}) 
+    async create(@Body() payload: LessonCreate) {
+        return await this.service.create(payload)
+    }
 }

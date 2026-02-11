@@ -5,7 +5,7 @@ import { BaseModel } from "../../../core/base-model.js";
 
 @Entity("taskTemplates")
 export class TaskTemplate extends BaseModel {
-  @PrimaryColumn({ type: "int" })
+  @Column({ type: "int" })
   categoryId!: number;
 
   @Column({ length: 128, type: "varchar" })

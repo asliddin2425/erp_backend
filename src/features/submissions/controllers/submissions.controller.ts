@@ -1,25 +1,33 @@
-import { Controller, Get, Param } from "@nestjs/common";
-import { SubmssionService } from "../submissions.service";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { SubmissionService } from "../submissions.service";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { SubmissionsList } from "../dtos/submissions.list";
+import { SubmissionCreate } from "../dtos/submissions.create";
 
 @Controller('submissions')
 
 export class SubmissionController {
-    constructor(private readonly service: SubmssionService) {}
+    constructor(private readonly service: SubmissionService) { }
 
 
 
     @Get()
-    @ApiOkResponse({type: SubmissionsList, isArray: true})
+    @ApiOkResponse({ type: SubmissionsList, isArray: true })
     async getAll() {
         return await this.service.getAll()
     }
 
 
     @Get(":id")
-    @ApiOkResponse({type: SubmissionsList})
-    async GetOne(@Param("id") id: number) {
-        return await this.service.GetOne(id)
+    @ApiOkResponse({ type: SubmissionsList })
+    async getOne(@Param("id") id: number) {
+        return await this.service.getOne(id)
+    }
+
+
+    @Post()
+    @ApiOkResponse({type: SubmissionCreate})
+    async create(@Body() payload: SubmissionCreate) {
+        return await this.service.create(payload)
     }
 }

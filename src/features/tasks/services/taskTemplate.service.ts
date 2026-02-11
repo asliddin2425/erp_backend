@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { plainToInstance } from "class-transformer";
 import { TaskTemplateList } from "../dtos/taskTemplate.list";
+import { TaskTemplateCreate } from "../dtos/taskTemplate.create";
 
 @Injectable()
 export class TaskTemplateService {
@@ -17,7 +18,7 @@ export class TaskTemplateService {
     async getAll() {
         const rawTaskTemplate = await this.repo.find();
         const taskTemplates = plainToInstance(
-            TaskTemplate,
+            TaskTemplateList,
             rawTaskTemplate,
             {
                 excludeExtraneousValues: true,
@@ -29,10 +30,19 @@ export class TaskTemplateService {
 
     async getOne(id: number) {
         const rawTaskTemplate = await this.repo.findOneBy({id})
-        if(!TaskTemplate) {
+        if(!rawTaskTemplate) {
             throw new Error("Not found")
         }
         return plainToInstance(TaskTemplateList, rawTaskTemplate, {
+            excludeExtraneousValues: true,
+        })
+    }
+
+    async create(paylaod: TaskTemplateCreate) {
+        const newTaskTemplate = this.repo.create(paylaod as TaskTemplate)
+        
+        await this.repo.save(newTaskTemplate)
+        return plainToInstance(TaskTemplateList, newTaskTemplate, {
             excludeExtraneousValues: true,
         })
     }

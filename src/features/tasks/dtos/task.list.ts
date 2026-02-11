@@ -1,5 +1,5 @@
 import { Expose, Type } from "class-transformer";
-import { TopologyType } from "typeorm";
+
 
 export class TaskList {
     @Expose()
@@ -12,7 +12,7 @@ export class TaskList {
     @Expose()
     @Type(() => Object)
     templateId: number;
-    
+
     @Expose()
     order: number;
 }

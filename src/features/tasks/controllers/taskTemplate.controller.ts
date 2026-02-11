@@ -1,7 +1,9 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { TaskCategoryService } from "../services/taskCategory.service";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { TaskTemplateList } from "../dtos/taskTemplate.list";
+import { TaskTemplateCreate } from "../dtos/taskTemplate.create";
+import { retry } from "rxjs";
 
 @Controller("taskTemplate")
 export class TaskTemplateController {
@@ -21,4 +23,9 @@ export class TaskTemplateController {
         return await this.service.getOne(id)
     }
 
+    @Post()
+    @ApiOkResponse({type: TaskTemplateCreate})
+    async create(@Body() paylaod: TaskTemplateCreate) {
+        return await this.service.create(paylaod)
+    }
 }

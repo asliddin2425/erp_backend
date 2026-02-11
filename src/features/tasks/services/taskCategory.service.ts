@@ -4,6 +4,7 @@ import { TaskCategory } from "../entities/taskCategory.entity";
 import { Repository } from "typeorm";
 import { plainToInstance } from "class-transformer";
 import { TaskCategoryList } from "../dtos/taskCategory.list";
+import { TaskCategoryCreate } from "../dtos/taskCategory.create";
 
 @Injectable()
 export class TaskCategoryService {
@@ -16,7 +17,7 @@ export class TaskCategoryService {
     async getAll() {
         const rawTaskCategory = await this.repo.find()
         const taskCategories = plainToInstance(
-            TaskCategory,
+            TaskCategoryList,
             rawTaskCategory,
             {
                 excludeExtraneousValues: true,
@@ -27,11 +28,21 @@ export class TaskCategoryService {
 
     async getOne(id: number) {
         const rawTaskCategory = await this.repo.findOneBy({id})
-        if(!TaskCategory) {
+        if(!rawTaskCategory) {
             throw new Error("Not found")
         }
         return plainToInstance(TaskCategoryList, rawTaskCategory, {
             excludeExtraneousValues: true,
         })
     }
+
+        async create(payload: TaskCategoryCreate) {
+            const newTaskCategory = this.repo.create(payload as TaskCategory)
+            await this.repo.save(newTaskCategory);
+
+            return plainToInstance(TaskCategoryList, newTaskCategory, {
+                excludeExtraneousValues: true,
+            })
+        }
+
 }
