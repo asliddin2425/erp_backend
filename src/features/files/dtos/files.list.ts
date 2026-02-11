@@ -1,24 +1,30 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Expose, Type } from "class-transformer";
 
 export class FilesList {
 
     @Expose()
+    @ApiProperty()
     id: number;
 
     
     @Expose()
-    @Type(() => Object)
+    @ApiProperty()
+    @Type(() => Number)
     lessonId: number;
 
     @Expose()
-    @Type(() => Object)
+    @ApiProperty()
+    @Type(() => Number)
     studentId: number;
 
     @Expose()
-    @Type(() => Object)
+    @ApiProperty()
+    @Type(() => Number)
     submissionId: number;
 
     @Expose()
+    @ApiProperty()
     path: string;
 
     @Expose()

@@ -8,19 +8,23 @@ export class FilesUpdate {
     @IsOptional()
     lessonId: number;
 
+    @ApiProperty()
     @IsInt()
     @IsOptional()
     studentId: number;
 
+    @ApiProperty()
     @IsInt()
     @IsOptional()
     submissionId: number;
 
+    @ApiProperty()
     @IsString()
     @IsOptional()
     @MaxLength(128)
     path: string;
 
+    @ApiProperty()
     @IsInt()
     @IsOptional()
     size: number;

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Files } from "./entities/files.entity";
 import { Repository } from "typeorm";
@@ -52,7 +52,7 @@ export class FilesService {
     async update(id: number, payload: FilesUpdate) {
         const files = await this.repo.findOneBy({id});
         if(!files) {
-            throw new Error("Not Found")
+            throw new NotFoundException();
         }
 
         Object.assign(
