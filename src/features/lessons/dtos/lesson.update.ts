@@ -4,7 +4,7 @@ export class LessonUpdate {
 
     @IsInt()
     @IsOptional()
-    groupid: number;
+    groupId: number;
 
     @IsString()
     @IsOptional()

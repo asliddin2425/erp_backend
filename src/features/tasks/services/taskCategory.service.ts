@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { plainToInstance } from "class-transformer";
 import { TaskCategoryList } from "../dtos/taskCategory.list";
 import { TaskCategoryCreate } from "../dtos/taskCategory.create";
+import { TaskCategoryUpdate } from "../dtos/taskCategory.update";
 
 @Injectable()
 export class TaskCategoryService {
@@ -36,13 +37,39 @@ export class TaskCategoryService {
         })
     }
 
-        async create(payload: TaskCategoryCreate) {
-            const newTaskCategory = this.repo.create(payload as TaskCategory)
-            await this.repo.save(newTaskCategory);
+    async create(payload: TaskCategoryCreate) {
+        const newTaskCategory = this.repo.create(payload as TaskCategory)
+        await this.repo.save(newTaskCategory);
+        return plainToInstance(TaskCategoryList, newTaskCategory, {
+            excludeExtraneousValues: true,
+        })
+    }
 
-            return plainToInstance(TaskCategoryList, newTaskCategory, {
-                excludeExtraneousValues: true,
-            })
+
+    async update(id: number, payload: TaskCategoryUpdate) {
+        const taskCategory = await this.repo.findOneBy({id})
+        if(!taskCategory) {
+            throw new Error("Not found")
         }
+        Object.assign(
+            taskCategory,
+            Object.fromEntries(
+                Object.entries(payload).filter(
+                    ([key, value]) =>value  !== null && value !==undefined,
+                ),
+            ),
+        );
+        await this.repo.save(taskCategory)
+        return taskCategory;
+    }
+
+    async delete(id: number) {
+        const taskCategory = await this.repo.findOneBy({id})
+        if(!taskCategory) {
+            throw new Error("Not found")
+        }
+        return await this.repo.remove(taskCategory)
+    }
+    
 
 }

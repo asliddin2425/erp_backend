@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { plainToInstance } from "class-transformer";
 import { TaskList } from "../dtos/task.list";
 import { TaskCreate } from "../dtos/task.create";
+import { TaskUpdate } from "../dtos/task.update";
 
 @Injectable()
 export class TaskService {
@@ -44,5 +45,33 @@ export class TaskService {
             excludeExtraneousValues: true,
         })
     }
+
+
+    async update(id: number, payload: TaskUpdate) {
+        const tasks = await this.repo.findOneBy({id})
+        if(!tasks) {
+            throw new Error("Not found")
+        }
+        Object.assign(
+            tasks,
+            Object.fromEntries(
+                Object.entries(payload).filter(
+                    ([key, value]) =>value  !== null && value !==undefined,
+                ),
+            ),
+        );
+        await this.repo.save(tasks)
+        return tasks;
+    }
+
+    async delete(id: number) {
+        const tasks = await this.repo.findOneBy({id})
+        if(!tasks) {
+            throw new Error("Not found")
+        }
+
+        return await this.repo.remove(tasks)
+    } 
+
 
 }

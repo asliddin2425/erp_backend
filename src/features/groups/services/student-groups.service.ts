@@ -54,5 +54,23 @@ export class StudentGroupsService {
         if(!studentGroups) {
             throw new Error("Not found")
         }
+        Object.assign(
+            studentGroups,
+            Object.fromEntries(
+                Object.entries(payload).filter(
+                    ([key, value]) =>value  !== null && value !==undefined,
+                ),
+            ),
+        );
+        await this.repo.save(studentGroups)
+        return studentGroups;
+    }
+
+    async dalete(id: number) {
+        const studentGroups = await this.repo.findOneBy({id})
+        if(!studentGroups) {
+            throw new Error("Not found")
+        }
+        return await this.repo.remove(studentGroups)
     }
 }

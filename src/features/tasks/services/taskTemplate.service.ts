@@ -6,6 +6,7 @@ import { ApiOkResponse } from "@nestjs/swagger";
 import { plainToInstance } from "class-transformer";
 import { TaskTemplateList } from "../dtos/taskTemplate.list";
 import { TaskTemplateCreate } from "../dtos/taskTemplate.create";
+import { TaskTemplateUpdate } from "../dtos/taskTemplate.update";
 
 @Injectable()
 export class TaskTemplateService {
@@ -46,4 +47,32 @@ export class TaskTemplateService {
             excludeExtraneousValues: true,
         })
     }
+
+
+    async update(id: number, payload: TaskTemplateUpdate) {
+        const taskTemplates = await this.repo.findOneBy({id})
+        if(!taskTemplates) {
+            throw new Error("Not found")
+        }
+        Object.assign(
+            taskTemplates,
+            Object.fromEntries(
+                Object.entries(payload).filter(
+                    ([key, value]) =>value  !== null && value !==undefined,
+                ),
+            ),
+        );
+        await this.repo.save(taskTemplates)
+        return taskTemplates;
+    }
+
+    async delete(id: number) {
+        const taskTemplates = await this.repo.findOneBy({id})
+        if(!taskTemplates) {
+            throw new Error("Not found")
+        }
+        return await this.repo.remove(taskTemplates)
+    }
+
+
 }

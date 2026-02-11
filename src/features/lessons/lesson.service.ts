@@ -1,10 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Param } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Lesson } from "./entities/lesson.entity";
 import { Repository } from "typeorm";
 import { plainToInstance } from "class-transformer";
 import { LessonList } from "./dtos/lesson.list";
 import { LessonCreate } from "./dtos/lesson.create";
+import { LessonUpdate } from "./dtos/lesson.update";
 
 @Injectable()
 export class LessonService {
@@ -44,5 +45,31 @@ export class LessonService {
         return plainToInstance(LessonList, newLesson, {
             excludeExtraneousValues: true,
         })
+    }
+
+    async update(id: number, payload: LessonUpdate) {
+        const lessons = await this.repo.findOneBy({ id })
+        if (!lessons) {
+            throw new Error("Not found")
+        }
+        Object.assign(
+            lessons,
+            Object.fromEntries(
+                Object.entries(payload).filter(
+                    ([key, value]) => value !== null && value !== undefined,
+                ),
+            ),
+        );
+        await this.repo.save(lessons)
+        return lessons;
+    }
+
+
+    async delete(id: number) {
+        const lessons = await this.repo.findOneBy({id})
+        if(!lessons) {
+            throw new Error("Not found")
+        }
+        return await this.repo.remove(lessons)
     }
 }

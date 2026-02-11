@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { GroupsService } from "../services/groups.service";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { GroupsList } from "../dtos/groups.list";
@@ -33,5 +33,11 @@ export class GroupController {
     @Patch(":id")
     async update(@Param("id") id: number, @Body() payload: GroupsUpdate) {
         return await this.service.update(id, payload)
+    }
+
+
+    @Delete(":id")
+    async delete(@Param("id") id: number) {
+        return await this.service.delete(id)
     }
 }

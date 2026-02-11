@@ -6,9 +6,8 @@ export class LessonList {
     id: number;
 
     @Expose()
-    @Type(() => Object)
     groupId: number;
-    
+
     @Expose()
     title: string;
 

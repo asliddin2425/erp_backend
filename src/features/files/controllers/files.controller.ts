@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch } from "@nestjs/common";
+import { Body, Controller, Delete, Param, Patch } from "@nestjs/common";
 import { FilesService } from "../files.service";
 import { Get, Post } from "@nestjs/common";
 import { ApiOkResponse } from "@nestjs/swagger";
@@ -35,5 +35,11 @@ export class FilesController {
     async update(@Param("id") id: number, @Body() payload: FilesUpdate) {
         return await this.service.update(id, payload)
     }
+
+    @Delete(":id")
+    async delete(@Param("id") id: number) {
+        return await this.service.delete(id)
+    }
+
     
 }

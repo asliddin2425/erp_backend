@@ -47,12 +47,32 @@ export class FilesService {
             excludeExtraneousValues: true,
         })
     }
-
+  
 
     async update(id: number, payload: FilesUpdate) {
         const files = await this.repo.findOneBy({id});
         if(!files) {
             throw new Error("Not Found")
         }
+
+        Object.assign(
+            files,
+            Object.fromEntries(
+                Object.entries(payload).filter(
+                    ([key, value]) =>value  !== null && value !==undefined,
+                ),
+            ),
+        );
+        await this.repo.save(files)
+        return files;
+    }
+
+
+    async delete(id: number) {
+        const files = await this.repo.findOneBy({id})
+        if(!files) {
+            throw new Error("Not found")
+        }
+        return await this.repo.remove(files)
     }
 }

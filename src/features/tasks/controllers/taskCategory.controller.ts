@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { TaskCategoryList } from "../dtos/taskCategory.list";
 import { TaskCategoryService } from "../services/taskCategory.service";
 import { TaskCategoryCreate } from "../dtos/taskCategory.create";
+import { TaskCategoryUpdate } from "../dtos/taskCategory.update";
 
 
 @Controller("taskCategory")
@@ -27,5 +28,15 @@ export class TaskCategoryController {
     @ApiOkResponse({type: TaskCategoryCreate})
     async create(@Body() payload: TaskCategoryCreate) {
         return await this.service.create(payload)
+    }
+
+    @Patch(":id")
+    async update(@Param("id") id: number, @Body() payload: TaskCategoryUpdate) {
+        return await this.service.update(id, payload)
+    }
+
+    @Delete(":id")
+    async delete(@Param("id") id: number) {
+        return await this.service.delete(id )
     }
 }

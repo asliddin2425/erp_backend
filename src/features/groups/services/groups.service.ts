@@ -6,6 +6,7 @@ import { plainToInstance } from "class-transformer";
 import { GroupsList } from "../dtos/groups.list";
 import { GroupsCreate } from "../dtos/groups.create";
 import { GroupsUpdate } from "../dtos/groups.update";
+import { group } from "console";
 
 @Injectable()
 export class GroupsService {
@@ -49,5 +50,24 @@ export class GroupsService {
         if(!groups) {
             throw new Error("Not found")
         }
+        Object.assign(
+            groups,
+            Object.fromEntries(
+                Object.entries(payload).filter(
+                    ([key, value]) =>value  !== null && value !==undefined,
+                ),
+            ),
+        );
+        await this.repo.save(groups)
+        return groups;
+    }
+
+
+    async delete(id: number) {
+        const groups = await this.repo.findOneBy({id})
+        if(!groups) {
+            throw new Error("Not found")
+        }
+        return await this.repo.remove(groups)
     }
 }
