@@ -14,9 +14,6 @@ export class LessonService {
         private readonly repo: Repository<Lesson>
     ) { }
 
-
-
-
     async getAll() {
         const rawLesson = await this.repo.find()
         const lessons = plainToInstance(

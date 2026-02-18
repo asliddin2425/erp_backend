@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
 import { IsBoolean, IsDate, IsInt } from "class-validator";
 
 export class StudentGroupsCreate {
@@ -12,6 +13,7 @@ export class StudentGroupsCreate {
     groupId: number;
 
     @ApiProperty()
+    @Type(() => Date)
     @IsDate()
     joinedDate: Date;
 

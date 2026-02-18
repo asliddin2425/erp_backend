@@ -6,9 +6,11 @@ import { FilesModule } from "./features/files/files.module";
 import { LessonModule } from "./features/lessons/lesson.module";
 import { SubmissionModule } from "./features/submissions/submissions.module";
 import { TaskModule } from "./features/tasks/task.module";
+import { UsersModule } from "./auth/user/user.module";
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeormConfig), 
+    UsersModule,
     GroupsModule, 
     FilesModule, 
     LessonModule, 

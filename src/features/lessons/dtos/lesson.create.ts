@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
 import { IsDate, IsInt, IsNotEmpty, IsString, MaxLength } from "class-validator";
 
 export class LessonCreate {
@@ -15,5 +16,6 @@ export class LessonCreate {
 
     @ApiProperty()
     @IsDate()
+    @Type(() => Date)
     startDate: Date;
 }

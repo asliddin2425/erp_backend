@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn } from "typeorm";
 import type { Relation } from "typeorm";
-import { User } from "../../../auth/entities/user.entity.js";
+import { User } from "../../../auth/user/entities/user.entity";
 import { Lesson } from "../../lessons/entities/lesson.entity.js";
 import { Submission } from "../../submissions/entities/submissions.entity.js";
 import { BaseModel } from "../../../core/base-model.js";

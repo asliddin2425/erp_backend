@@ -7,7 +7,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { GroupStatus } from "../../../common/enums/enums.js";
-import { User } from "../../../auth/entities/user.entity.js";
+import { User } from "../../../auth/user/entities/user.entity.js";
 import { Lesson } from "../../lessons/entities/lesson.entity.js";
 import { BaseModel } from "../../../core/base-model.js";
 

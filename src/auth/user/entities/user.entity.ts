@@ -1,10 +1,10 @@
 import { Entity, Column, OneToMany } from "typeorm";
 import type { Relation } from "typeorm";
-import { Gender, Role } from "../../common/enums/enums";
-import { Submission } from "../../features/submissions/entities/submissions.entity.js";
-import { Group } from "../../features/groups/entities/groups.entity.js";
-import { BaseModel } from "../../core/base-model.js";
-import { Files } from "../../features/files/entities/files.entity.js";
+import { Gender, Role } from "../../../common/enums/enums";
+import { Submission } from "../../../features/submissions/entities/submissions.entity";
+import { Group } from "../../../features/groups/entities/groups.entity";
+import { BaseModel } from "../../../core/base-model";
+import { Files } from "../../../features/files/entities/files.entity";
 
 @Entity("users")
 export class User extends BaseModel {

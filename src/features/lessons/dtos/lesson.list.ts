@@ -18,5 +18,6 @@ export class LessonList {
 
     @Expose()
     @ApiProperty()
+    @Type(() => Date)
     startDate: Date;
 }

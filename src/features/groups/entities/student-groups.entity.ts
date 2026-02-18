@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn } from "typeorm";
 
-import { User } from "../../../auth/entities/user.entity.js";
+import { User } from "../../../auth/user/entities/user.entity";
 import { Group } from "../../groups/entities/groups.entity.js";
 import { BaseModel } from "../../../core/base-model.js";
 

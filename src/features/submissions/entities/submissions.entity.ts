@@ -9,7 +9,7 @@ import {
 import type { Relation } from "typeorm";
 
 import { SubmissionStatus } from "../../../common/enums/enums";
-import { User } from "../../../auth/entities/user.entity";
+import { User } from "../../../auth/user/entities/user.entity";
 import { Task } from "../../tasks/entities/task.entity.js";
 import { Files } from "../../files/entities/files.entity.js";
 import { BaseModel } from "../../../core/base-model.js";

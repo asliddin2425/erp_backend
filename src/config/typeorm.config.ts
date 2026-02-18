@@ -17,7 +17,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export const typeormConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  url: 'postgresql://postgres:1234@localhost:5432/dars504',
+  url: 'postgresql://postgres:1234@localhost:5432/erp',
   synchronize: true,
   entities: ['dist/features/**/*.entity.{ts,js}', "dist/auth/**/*.entity.{ts,js}"],
 };
